@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 /**
  * 发送邮件辅助类
  * 
- * @author zhang
  */
 @Component
 public final class EmailUtil {

@@ -20,12 +20,12 @@ public class EmailTest {
 			Email email = new Email();
 			email.setHost("smtp.163.com");
 			email.setPort(25);
-			email.setName("mamstest@163.com");
-			email.setPassword("luweimiao1");
-			email.setFrom("mamstest@163.com");
-			String[] sendTo = {"luweimiao1@crc.com.hk"};
+			email.setName("707944442@qq.com");
+			email.setPassword("asdf123456");
+			email.setFrom("707944442@qq.com");
+			String[] sendTo = {"707944442@qq.com"};
 			email.setSendTo(sendTo);
-			String[] copyTo = {"mamstest@163.com"};
+			String[] copyTo = {"707944442@qq.com"};
 			email.setCopyTo(copyTo);
 			email.setTopic("测试邮件!！");
 			email.setBody("bbbbbbbbbbbbbb");

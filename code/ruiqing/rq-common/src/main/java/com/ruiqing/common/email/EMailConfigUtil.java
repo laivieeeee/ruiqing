@@ -8,8 +8,6 @@ import java.util.Properties;
 
 /**
  * 邮件服务器及freemarker配置工具类
- * @author LUWEIMIAO1
- * @date 2017年10月23日 下午7:17:20
  */
 public class EMailConfigUtil {
 
