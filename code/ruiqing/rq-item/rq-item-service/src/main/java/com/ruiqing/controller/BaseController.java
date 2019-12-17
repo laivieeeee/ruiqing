@@ -7,8 +7,6 @@ import com.ruiqing.entity.BaseEntity;
 import com.ruiqing.enums.ErrorCodeEnum;
 import com.ruiqing.util.api.ObjectResult;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -17,7 +15,6 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 

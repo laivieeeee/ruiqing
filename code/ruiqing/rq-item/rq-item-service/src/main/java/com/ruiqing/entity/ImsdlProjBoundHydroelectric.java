@@ -13,7 +13,7 @@ import java.util.Date;
  * @since 2019-10-24
  */
 @Entity(name="imsdl_proj_bound_hydroelectric")
-public class ImsdlProjBoundHydroelectric {
+public class ImsdlProjBoundHydroelectric extends BaseEntity{
 
     private static final long serialVersionUID = 1L;
 
