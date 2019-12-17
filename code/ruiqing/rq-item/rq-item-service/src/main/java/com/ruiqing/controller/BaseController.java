@@ -1,14 +1,9 @@
 package com.ruiqing.controller;
 
-import com.crc.imsdl.dto.ImsdlOrgJurisdicDTO;
-import com.crc.imsdl.entity.ImsdlBaseEntity;
-import com.crc.imsdl.service.DataAuthService;
-import com.crc.mam.dto.LoginUserDTO;
-import com.crc.mam.entity.BaseEntity;
-import com.crc.mam.enums.ErrorCodeEnum;
-import com.crc.mam.util.LoginUserSessionHelper;
-import com.crc.mam.util.Resources;
-import com.crc.mam.util.api.ObjectResult;
+import com.ruiqing.common.utils.LoginUserSessionHelper;
+import com.ruiqing.common.utils.Resources;
+import com.ruiqing.dto.LoginUserDTO;
+import com.ruiqing.entity.BaseEntity;
 import com.ruiqing.enums.ErrorCodeEnum;
 import com.ruiqing.util.api.ObjectResult;
 import org.apache.commons.lang3.StringUtils;
@@ -34,8 +29,6 @@ import java.util.Set;
  */
 public class BaseController {
 	
-	@Autowired
-	private DataAuthService dataAuthService;
 
 	public HttpServletRequest getRequest() {
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
@@ -178,46 +171,7 @@ public class BaseController {
 		return LoginUserSessionHelper.getLoginUserDTO(getRequest());
 	}
 	
-	/**
-	 * bean参数验证
-	 * 
-	 * @param <T>
-	 * @param entity
-	 */
-	public <T extends ImsdlBaseEntity> void dataAuthInit(T entity) {
-		String userId = getLoginUserId();
-		ImsdlOrgJurisdicDTO dto = new ImsdlOrgJurisdicDTO();
-		dto.setLoginUserId(userId);
-		
-		//设置查询组织权限
-		dto.setJurisdicType("ORG");
-		List<String> dataAuthOrglist = dataAuthService.queryDataAuthByJuriType(dto);
-		if(!CollectionUtils.isEmpty(dataAuthOrglist)) {
-			entity.setDataAuthOrgId(dataAuthOrglist.get(0));
-		}
-		
-		//设置查询投资类型
-		dto.setJurisdicType("INVESTTYPE");
-		List<String> dataAuthInvetypelist = dataAuthService.queryDataAuthByJuriType(dto);
-		if(!CollectionUtils.isEmpty(dataAuthInvetypelist)) {
-			entity.setDataAuthInvestTypeList(dataAuthInvetypelist);
-		}
-		
-		//设置查询业态
-		dto.setJurisdicType("OPERATYPE");
-		List<String> dataAuthoperatypelist = dataAuthService.queryDataAuthByJuriType(dto);
-		if(!CollectionUtils.isEmpty(dataAuthoperatypelist)) {
-			entity.setDataAuthOperaTypeList(dataAuthoperatypelist);
-		}
-		
-		//设置查询境内外
-		dto.setJurisdicType("DOMFOREIGN");
-		List<String> dataAuthDomForeignlist = dataAuthService.queryDataAuthByJuriType(dto);
-		if(!CollectionUtils.isEmpty(dataAuthDomForeignlist)) {
-			entity.setDataAuthDomForeignList(dataAuthDomForeignlist);
-		}
-	}
-	
+
 	
 	 public String getBasePath() {
 	        HttpServletRequest request = this.getRequest();
