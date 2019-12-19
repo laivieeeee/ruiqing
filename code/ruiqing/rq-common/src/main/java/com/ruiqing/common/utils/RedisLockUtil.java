@@ -2,8 +2,6 @@ package com.ruiqing.common.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.util.StringUtils;
 
 /**
  * REDIS分布式锁工具类
@@ -13,8 +11,8 @@ public class RedisLockUtil {
 	private static final Logger logger = LoggerFactory.getLogger(RedisLockUtil.class);
 	
 	@SuppressWarnings("unchecked")
-	private static RedisTemplate<String, Object> redisTemplate = SpringUtils.getBean("redisTemplate",
-			RedisTemplate.class);
+	//private static RedisTemplate<String, Object> redisTemplate = SpringUtils.getBean("redisTemplate",
+			//RedisTemplate.class);
 	
 	private static long lockTimeout = 5*60*1000; //锁定时间
 
@@ -28,7 +26,7 @@ public class RedisLockUtil {
     public static boolean lock(String key, long currvalue) {
     	String value = currvalue+lockTimeout+"";
     	//未加锁，则加锁
-        if (redisTemplate.opsForValue().setIfAbsent(key, value)) {
+       /* if (redisTemplate.opsForValue().setIfAbsent(key, value)) {
             return true;
         }
         
@@ -41,7 +39,7 @@ public class RedisLockUtil {
             if (!StringUtils.isEmpty(olcValue) && olcValue.equals(currentValue)) {
                 return true;
             }
-        }
+        }*/
 
         return false;
     }
@@ -53,7 +51,7 @@ public class RedisLockUtil {
      * @param value
      */
     public static void unlock(String key, long currvalue) {
-        try {
+       /* try {
         	String value = currvalue+lockTimeout+"";
             String currentVlue = (String)redisTemplate.opsForValue().get(key);
             if (!StringUtils.isEmpty(currentVlue) && currentVlue.equals(value)) {
@@ -61,6 +59,6 @@ public class RedisLockUtil {
             }
         } catch (Exception e) {
         	logger.error("【redis分布式锁】 解锁异常" + e.getMessage());
-        }
+        }*/
     }
 }

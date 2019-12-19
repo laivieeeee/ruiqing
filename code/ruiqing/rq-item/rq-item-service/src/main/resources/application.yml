@@ -1,6 +1,7 @@
 server:
   port: 5860
 spring:
+
   application:
     name: item-service
   datasource:
@@ -21,3 +22,20 @@ eureka:
     prefer-ip-address: true
     ip-address: 127.0.0.1
     instance-id: ${spring.application.name}:${server.port}
+mybatis:
+  config-locations: classpath:mybatis-config.xml
+  mapper-locations: classpath:mapper/*.xml
+
+ripples:
+  resource:
+    offsiteLogin: N
+    doNotCheckUrls:
+      - /api
+      - /login
+      - /logout
+      - /ssologin
+      - /upload
+      - /druid
+      - /i18n
+      - /swagger
+    commonUrls:

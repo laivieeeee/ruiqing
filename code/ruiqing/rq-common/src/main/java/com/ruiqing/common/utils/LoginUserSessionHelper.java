@@ -10,7 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+//import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +23,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author LUWEIMIAO1
  * @date 2017年10月13日 下午1:58:09
  */
-@Component
+//@Component
 public class LoginUserSessionHelper {
 
 	private static int sessionTimeout = 1800; // 30 mins
@@ -55,7 +55,7 @@ public class LoginUserSessionHelper {
 	public static void setLoginUserLocale(String userId, Locale locale) {
 		String key = Constant.LOGIN_USER_REDIS_PRE + userId;
 		String field = Constant.SYSTEM_USER_LOCALE;
-		RedisUtil.addMap(key, field, locale);
+		//RedisUtil.addMap(key, field, locale);
 	}
 
 	/**
@@ -70,7 +70,8 @@ public class LoginUserSessionHelper {
 		}
 		String key = Constant.LOGIN_USER_REDIS_PRE + userId;
 		String field = Constant.SYSTEM_USER_LOCALE;
-		return RedisUtil.getMapField(key, field, Locale.class);
+		//return RedisUtil.getMapField(key, field, Locale.class);
+		return null;
 	}
 
 	/**
@@ -131,13 +132,14 @@ public class LoginUserSessionHelper {
 		String key = Constant.LOGIN_USER_REDIS_PRE + userId;
 		String field = Constant.SYSTEM_LOGINUSER_TOKEN;
 		// RedisUtil.hsetObject(key, field, user);
-		RedisUtil.addMap(key, field, token);
+		//RedisUtil.addMap(key, field, token);
 	}
 
 	public static String getSystemLoginUserToken(String userId) {
 		String key = Constant.LOGIN_USER_REDIS_PRE + userId;
 		String field = Constant.SYSTEM_LOGINUSER_TOKEN;
-		return RedisUtil.getMapField(key, field, String.class);
+		//return RedisUtil.getMapField(key, field, String.class);
+		return null;
 	}
 
 	/**
@@ -164,8 +166,8 @@ public class LoginUserSessionHelper {
 		}
 		String key = Constant.LOGIN_USER_REDIS_PRE;
 		String field = userid;
-		JSONObject userJson = RedisUtil.getMapField(key, field, JSONObject.class);
-		return userJson;
+		//JSONObject userJson = RedisUtil.getMapField(key, field, JSONObject.class);
+		return null;
 	}
 
 	/**
@@ -184,7 +186,7 @@ public class LoginUserSessionHelper {
 		String key = Constant.LOGIN_USER_REDIS_PRE;
 		//String[] tokenArray = user.get(JSON_USER_TOKEN).toString().split("#");
 		//String field = tokenArray[1];
-		RedisUtil.addMap(key, userId, user);
+		//RedisUtil.addMap(key, userId, user);
 	}
 
 	/**
@@ -279,8 +281,8 @@ public class LoginUserSessionHelper {
 		String userid = JWTTokenUtil.getUseridByJWTToken(token);
 
 		String field = userid;
-		JSONObject json = RedisUtil.getMapField(key, field, JSONObject.class);
-		return json;
+		//JSONObject json = RedisUtil.getMapField(key, field, JSONObject.class);
+		return null;
 	}
 
 	/**
@@ -310,7 +312,8 @@ public class LoginUserSessionHelper {
 
 		String key = Constant.LOGIN_USER_REDIS_PRE;
 
-		Map<String, JSONObject> map = RedisUtil.getMap(key, JSONObject.class);
+		//Map<String, JSONObject> map = RedisUtil.getMap(key, JSONObject.class);
+		Map<String, JSONObject> map = new HashMap<>();
 
 		for (Map.Entry<String, JSONObject> entry : map.entrySet()) {
 			JSONObject json = entry.getValue();
@@ -338,7 +341,7 @@ public class LoginUserSessionHelper {
 	public static void setSysUserRoleCurrent(String userid, String currRole) {
 		String key = Constant.LOGIN_USER_REDIS_PRE + userid;
 		String field = Constant.SYSTEM_USERROLE_CURRENT;
-		RedisUtil.addMap(key, field, currRole);
+		//RedisUtil.addMap(key, field, currRole);
 	}
 
 	/**
@@ -366,13 +369,14 @@ public class LoginUserSessionHelper {
 		}
 		String key = Constant.LOGIN_USER_REDIS_PRE + userid;
 		String field = Constant.SYSTEM_USERROLE_CURRENT;
-		String currRole = RedisUtil.getMapField(key, field, String.class);
+		/*String currRole = RedisUtil.getMapField(key, field, String.class);
 		String currRoleId=currRole;
 		if(StringUtils.isNotBlank(currRole)){
 			String[] currRoleArr=currRole.split("#");
 			currRoleId=currRoleArr[0];
 		}
-		return currRoleId;
+		return currRoleId;*/
+		return null;
 	}
 
 	public static String getSysUserCurrRoleName(String userid) {
@@ -381,7 +385,7 @@ public class LoginUserSessionHelper {
 		}
 		String key = Constant.LOGIN_USER_REDIS_PRE + userid;
 		String field = Constant.SYSTEM_USERROLE_CURRENT;
-		String currRole = RedisUtil.getMapField(key, field, String.class);
+		/*String currRole = RedisUtil.getMapField(key, field, String.class);
 		String currRoleName=null;
 		if(StringUtils.isNotBlank(currRole)){
 			String[] currRoleArr=currRole.split("#");
@@ -389,7 +393,8 @@ public class LoginUserSessionHelper {
 				currRoleName=currRoleArr[1];
 			}
 		}
-		return currRoleName;
+		return currRoleName;*/
+		return null;
 	}
 
 	/**
@@ -405,11 +410,11 @@ public class LoginUserSessionHelper {
 		String field = Constant.SYSTEM_USERROLE;
 		RedisUtil.addMap(key, field, surList);
 	}*/
-	public static void setSysUserRole(String userid, Map<String,String> rolesMap) {
+	/*public static void setSysUserRole(String userid, Map<String,String> rolesMap) {
 		String key = Constant.LOGIN_USER_REDIS_PRE + userid;
 		String field = Constant.SYSTEM_USERROLE;
 		RedisUtil.addMap(key, field, rolesMap);
-	}
+	}*/
 
 	/**
 	 * 获取用户登录对象 SysUserRole
@@ -430,7 +435,7 @@ public class LoginUserSessionHelper {
 		List<SysUserRole> surList = RedisUtil.getMapFieldList(key, field, SysUserRole.class);
 		return surList;
 	}*/
-	public static JSONObject getSysUserRoleJson(String userid) {
+	/*public static JSONObject getSysUserRoleJson(String userid) {
 		if (StringUtils.isBlank(userid)) {
 			return null;
 		}
@@ -439,7 +444,7 @@ public class LoginUserSessionHelper {
 		Map<String,String> surMap = RedisUtil.getMapFieldMap(key, field, String.class);
 		JSONObject roles = JSONObject.parseObject(JSON.toJSONString(surMap));
 		return roles;
-	}
+	}*/
 
 	/**
 	 * 取得登录用户的ID;
@@ -529,7 +534,7 @@ public class LoginUserSessionHelper {
 
 	public static void updateUserSessionAndAccessTime(String userId, JSONObject loginUser) {
 		String key = Constant.LOGIN_USER_REDIS_PRE + userId;
-		RedisUtil.expire(key, sessionTimeout);
+		//RedisUtil.expire(key, sessionTimeout);
 		// 更新缓存用户最后访问时间
 
 		loginUser.put(JSON_USER_LAST_ACCESS_TIME,System.currentTimeMillis());
@@ -594,7 +599,7 @@ public class LoginUserSessionHelper {
 		// 清空用户缓存
 		RedisUtil.del(Constant.LOGIN_USER_REDIS_PRE + userid);
 		// 删除用户信息数据
-		RedisUtil.delMapField(Constant.LOGIN_USER_REDIS_PRE, userid);
+		//RedisUtil.delMapField(Constant.LOGIN_USER_REDIS_PRE, userid);
 
 
 	}
@@ -603,11 +608,11 @@ public class LoginUserSessionHelper {
 		String crcToken = getSystemLoginUserToken(userId);
 		if(StringUtils.isNotBlank(crcToken)) {
 			String key = Constant.LOGIN_USER_REDIS_PRE + crcToken;
-			RedisUtil.addMap(key, field, status, sessionTimeout);
+			//RedisUtil.addMap(key, field, status, sessionTimeout);
 		}
 	}
 
-	public static boolean checkForge(String userid, HttpServletRequest request, HttpServletResponse response) {
+	/*public static boolean checkForge(String userid, HttpServletRequest request, HttpServletResponse response) {
 		//新方案 1：LOGIN_USER_REDIS_PRE的Map userid field不存在， 2. Constant.LOGIN_USER_REDIS_PRE + userid Map的所有field除了一个mark都不存在，mark标识forge标识被迫下线
 
 		String key = Constant.LOGIN_USER_REDIS_PRE + userid;
@@ -631,28 +636,28 @@ public class LoginUserSessionHelper {
 		String key = Constant.LOGIN_USER_REDIS_PRE + crcToken;
 		String field = Constant.SYSTEM_USER_INVALID_REASON;
 		return Constant.SYSTEM_USER_OFFSITE_LOGON.equals(RedisUtil.getMapField(key, field, String.class));
-	}
+	}*/
 
 	public static void cleanTimeoutUser(String userid) {
 		//新方案，Timeout user会1：清空LOGIN_USER_REDIS_PRE的Map， 2. 删除Constant.LOGIN_USER_REDIS_PRE + userid Map的所有field
 		// 清空用户缓存
 		RedisUtil.del(Constant.LOGIN_USER_REDIS_PRE + userid);
 		// 删除用户信息数据
-		RedisUtil.delMapField(Constant.LOGIN_USER_REDIS_PRE, userid);
+		//RedisUtil.delMapField(Constant.LOGIN_USER_REDIS_PRE, userid);
 	}
 	public static void userLogout(String userid) {
 		String crcToken = getSystemLoginUserToken(userid);
 		if(StringUtils.isNotBlank(crcToken)){
-			if(RedisUtil.hasFiledInKey(Constant.LOGIN_USER_REDIS_PRE + crcToken, Constant.SYSTEM_USER_INVALID_REASON)){
+			/*if(RedisUtil.hasFiledInKey(Constant.LOGIN_USER_REDIS_PRE + crcToken, Constant.SYSTEM_USER_INVALID_REASON)){
 				RedisUtil.del(Constant.LOGIN_USER_REDIS_PRE + crcToken);
-			}
+			}*/
 		}
 		//新方案，logout user会1：清空LOGIN_USER_REDIS_PRE的Map， 2. 删除Constant.LOGIN_USER_REDIS_PRE + userid Map的所有field
 
 		// 清空用户缓存
 		RedisUtil.del(Constant.LOGIN_USER_REDIS_PRE + userid);
 		// 删除用户信息数据
-		RedisUtil.delMapField(Constant.LOGIN_USER_REDIS_PRE, userid);
+		//RedisUtil.delMapField(Constant.LOGIN_USER_REDIS_PRE, userid);
 	}
 
 	public static void cleanUserMap(String userid) {
@@ -661,7 +666,7 @@ public class LoginUserSessionHelper {
 		// 清空用户缓存
 		RedisUtil.del(Constant.LOGIN_USER_REDIS_PRE + userid);
 		// 删除用户信息数据
-		RedisUtil.delMapField(Constant.LOGIN_USER_REDIS_PRE, userid);
+		//RedisUtil.delMapField(Constant.LOGIN_USER_REDIS_PRE, userid);
 
 	}
 
@@ -725,7 +730,7 @@ public class LoginUserSessionHelper {
 	public static void cacheMenuTree(String userid, String roleId, List<BaseMenu> menuList, String langCode) {
 		String key = Constant.LOGIN_USER_REDIS_PRE + userid;
 		String field = Constant.SYSTEM_USER_MENU_TREE + roleId+langCode;
-		RedisUtil.addMap(key, field, menuList, sessionTimeout);
+		//RedisUtil.addMap(key, field, menuList, sessionTimeout);
 	}
 
 	/**
@@ -736,7 +741,7 @@ public class LoginUserSessionHelper {
 	 * @return List<BaseMenu> menuList
 	 *
 	 */
-	public static List<BaseMenu> getMenuTree(String userid, String roleId,String langCode) {
+	/*public static List<BaseMenu> getMenuTree(String userid, String roleId,String langCode) {
 		if (StringUtils.isBlank(userid)) {
 			return null;
 		}
@@ -744,7 +749,7 @@ public class LoginUserSessionHelper {
 		String field = Constant.SYSTEM_USER_MENU_TREE + roleId+langCode;
 		List<BaseMenu> menuList = RedisUtil.getMapFieldList(key, field, BaseMenu.class);
 		return menuList;
-	}
+	}*/
 
 	/**
 	 * 清空当前登陆用户的菜单树信息
@@ -754,14 +759,14 @@ public class LoginUserSessionHelper {
 	 * @return
 	 *
 	 */
-	public static void clearMenuTree(String userid, String roleId,String langCode) {
+	/*public static void clearMenuTree(String userid, String roleId,String langCode) {
 		if (StringUtils.isBlank(userid)) {
 			return;
 		}
 		String key = Constant.LOGIN_USER_REDIS_PRE + userid;
 		String field = Constant.SYSTEM_USER_MENU_TREE + roleId+langCode;
 		RedisUtil.delMapField(key, field);
-	}
+	}*/
 
 	/**
 	 * 设置当前登陆用户的角色的按钮资源
@@ -773,7 +778,7 @@ public class LoginUserSessionHelper {
 	public static void cacheSysRightBtn(String userid, String roleId, List<SysRightBtn> list) {
 		String key = Constant.LOGIN_USER_REDIS_PRE + userid;
 		String field = Constant.SYSTEM_USER_RIGHT_BTN + roleId;
-		RedisUtil.addMap(key, field, list, sessionTimeout);
+		//RedisUtil.addMap(key, field, list, sessionTimeout);
 	}
 
 	/**
@@ -783,7 +788,7 @@ public class LoginUserSessionHelper {
 	 * @param roleId
 	 * @return
 	 */
-	public static List<SysRightBtn> getSysRightBtn(String userid, String roleId) {
+	/*public static List<SysRightBtn> getSysRightBtn(String userid, String roleId) {
 		if (StringUtils.isBlank(userid)) {
 			return null;
 		}
@@ -791,7 +796,7 @@ public class LoginUserSessionHelper {
 		String field = Constant.SYSTEM_USER_RIGHT_BTN + roleId;
 		List<SysRightBtn> menuList = RedisUtil.getMapFieldList(key, field, SysRightBtn.class);
 		return menuList;
-	}
+	}*/
 
 	/**
 	 * 清空当前登陆用户的角色的按钮资源
@@ -799,7 +804,7 @@ public class LoginUserSessionHelper {
 	 * @param userid
 	 * @param roleId
 	 */
-	public static void clearSysRightBtn(String userid, String roleId) {
+	/*public static void clearSysRightBtn(String userid, String roleId) {
 		if (StringUtils.isBlank(userid)) {
 			return;
 		}
@@ -863,6 +868,6 @@ public class LoginUserSessionHelper {
 				LoginUserSessionHelper.cleanTimeoutUser(userId);
 			}
 		}
-	}
+	}*/
 
 }

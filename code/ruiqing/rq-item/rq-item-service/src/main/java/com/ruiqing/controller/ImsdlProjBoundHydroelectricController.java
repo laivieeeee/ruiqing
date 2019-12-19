@@ -35,8 +35,8 @@ public class ImsdlProjBoundHydroelectricController extends BaseController {
 	@ApiOperation(value = "查询列表")
 	@PostMapping("/query")
 	public Object query(@ApiParam(value = "应用DTO对象", required = true) @RequestBody ImsdlProjBoundHydroelectricDTO dto) throws Exception {
-		CommonPageDTO commonPage = imsdlProjBoundHydroelectricService.findPage(dto);
-		return renderSuccess(commonPage);
+		ImsdlProjBoundHydroelectricDTO boundHydroelectricByExtId = imsdlProjBoundHydroelectricService.getBoundHydroelectricByExtId(dto.getId());
+		return renderSuccess(boundHydroelectricByExtId);
 	}
 
 	
@@ -76,7 +76,6 @@ public class ImsdlProjBoundHydroelectricController extends BaseController {
 	@ApiOperation(value = "查看数据")
 	@PostMapping(value = { "/detail/{id}" })
 	public Object view(@PathVariable(name="id") String id) throws Exception {
-		//Assert.isNotBlank(id, "");
 		ImsdlProjBoundHydroelectricDTO dto = imsdlProjBoundHydroelectricService.getById(id);
 		return renderSuccess(dto);
 	}
