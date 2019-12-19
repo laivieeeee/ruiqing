@@ -33,7 +33,7 @@ public class ApiResult<T extends Serializable> extends ApiReturnObject implement
 	}
 
 	public static <U extends Serializable> ApiResult<U> newFailResult(String code, String message, U data) {
-		ApiResult<U> result = new ApiResult<U>();
+		ApiResult<U> result = new ApiResult();
 		result.setStatusCode(code);
 		result.setMsg(message);
 		result.setData(data);
@@ -41,7 +41,7 @@ public class ApiResult<T extends Serializable> extends ApiReturnObject implement
 	}
 
 	public static <U extends Serializable> ApiResult<U> newSuccessResult(U data) {
-		ApiResult<U> result = new ApiResult<U>();
+		ApiResult<U> result = new ApiResult();
 		result.setStatusCode(ErrorCodeEnum.SUCCESS.getStatusCode());
 		result.setMsg("success");
 		result.setData(data);

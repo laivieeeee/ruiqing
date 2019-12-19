@@ -28,9 +28,8 @@ public class BaseController {
 	
 
 	public HttpServletRequest getRequest() {
-		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
+		return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
 				.getRequest();
-		return request;
 	}
 
 	/**
@@ -172,8 +171,7 @@ public class BaseController {
 	
 	 public String getBasePath() {
 	        HttpServletRequest request = this.getRequest();
-	        String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+		 return request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 	            + request.getContextPath() + "/";
-	        return basePath;
 	    }
 }

@@ -22,7 +22,6 @@ public class ApiReturnObject {
 	@ApiModelProperty(value = "提示信息")
 	public String getMsg() {
 		if (StringUtils.isBlank(this.msg) && StringUtils.equals(ErrorCodeEnum.FAIL.getStatusCode(), this.statusCode))
-			//return ErrorCodeEnum.FAIL.getStatusMsg();
         {
             return "API RETURN ERROR";
         }

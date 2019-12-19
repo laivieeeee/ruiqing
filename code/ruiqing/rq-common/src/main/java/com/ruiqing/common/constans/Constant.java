@@ -5,7 +5,7 @@ package com.ruiqing.common.constans;
  */
 public class Constant {
 	/** 登录用户方言**/
-    public static String SYSTEM_USER_LOCALE="systemUserLocale";
+    public static final String SYSTEM_USER_LOCALE="systemUserLocale";
     /** 登录用户角色 **/
     public static final String SYSTEM_USERROLE = "systemUserRole";
     /** 登录用户角色 **/
@@ -56,7 +56,7 @@ public class Constant {
     /** 系统类型：后台管理 **/
     public static final String SYS_FULL_NAME_PURCHASE = "谷登运营管理后台";
     /** 登录用户Id session key **/
-    public static String LOGIN_SESSSION_USER = "CRC_UserInfo";
+    public static final String LOGIN_SESSSION_USER = "CRC_UserInfo";
 
     /** 登录cookie login uuid **/
     public static String LOGIN_SSO_NAME = "CRC_LOGIN_SSO_NAME";

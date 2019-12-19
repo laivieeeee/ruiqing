@@ -35,13 +35,12 @@ public class UploadFileUtil {
 
 	//单文件上传
 	public static String uploadFile(File file){
-		String fid = FastDFSClient.uploadFile(file,file.getName());
-		return fid;
+		return FastDFSClient.uploadFile(file,file.getName());
 	}
 
 	//多文件上传
 	public static Map<String,Object> uploadMultiFile(HttpServletRequest request, HttpServletResponse response){
-		Map<String,Object> result = new HashMap<String,Object>();
+		Map<String,Object> result = new HashMap();
 		try{
 			request.setCharacterEncoding("utf-8");
 			response.setCharacterEncoding("utf-8");
@@ -85,8 +84,7 @@ public class UploadFileUtil {
 		 */
 		String[] tempArr2 = tempArr1[2].split("=");
 		//获取文件名，兼容各种浏览器的写法
-		String fileName = tempArr2[1].substring(tempArr2[1].lastIndexOf("\\")+1).replaceAll("\"", "");
-		return fileName;
+		return tempArr2[1].substring(tempArr2[1].lastIndexOf("\\")+1).replaceAll("\"", "");
 	}
 
 	public static File imageFromBase64String2File(String spic,String suffix) throws IOException {
@@ -104,8 +102,7 @@ public class UploadFileUtil {
 
 	public static File imageFromString2File(String spic,String suffix) throws IOException {
 
-		ByteArrayInputStream in_nocode = new ByteArrayInputStream(spic.getBytes());
-		BufferedImage bi = ImageIO.read(in_nocode);
+		BufferedImage bi = ImageIO.read(new ByteArrayInputStream(spic.getBytes()));
 		//创建临时文件
 		File w2 = File.createTempFile("img","."+suffix);
 		ImageIO.write(bi, suffix, w2);

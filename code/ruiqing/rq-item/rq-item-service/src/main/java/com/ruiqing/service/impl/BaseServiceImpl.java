@@ -51,11 +51,11 @@ public abstract class BaseServiceImpl<M extends BaseMapper<T>, T extends BaseEnt
 
 	@Override
 	public CommonPageDTO findPage(T t) throws Exception {
-		CommonPageDTO CommonPageDTO=t.getCommonPageDTO();
-		Page<?> page= PageHelper.startPage(CommonPageDTO.getCurrentPage(), CommonPageDTO.getPageSize());
-		CommonPageDTO.setRecordList(findList(t));
-		CommonPageDTO.initiatePage(page.getTotal());
-		return CommonPageDTO;
+		CommonPageDTO commonPageDTO=t.getCommonPageDTO();
+		Page<?> page= PageHelper.startPage(commonPageDTO.getCurrentPage(), commonPageDTO.getPageSize());
+		commonPageDTO.setRecordList(findList(t));
+		commonPageDTO.initiatePage(page.getTotal());
+		return commonPageDTO;
 	}
 
 	@Override
