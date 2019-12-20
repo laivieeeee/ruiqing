@@ -3,7 +3,6 @@ package com.ruiqing.controller;
 import com.alibaba.fastjson.JSON;
 import com.ruiqing.common.utils.RedisUtil;
 import com.ruiqing.dto.ImsdlProjBoundHydroelectricDTO;
-import com.ruiqing.dto.base.CommonPageDTO;
 import com.ruiqing.service.ImsdlProjBoundHydroelectricService;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
@@ -21,7 +20,7 @@ import java.util.Map;
  * @since 2019-10-24
  */
 @RestController
-@Api(value = "", description = "")
+@Api(value = "", tags = "测试水电")
 @RequestMapping("/imsdlProjBoundHydroelectric")
 public class ImsdlProjBoundHydroelectricController extends BaseController {
 	/** 记录日志 */
@@ -37,10 +36,10 @@ public class ImsdlProjBoundHydroelectricController extends BaseController {
 	 */
 	@ApiOperation(value = "查询列表")
 	@PostMapping("/query")
-	public Object query(@ApiParam(value = "应用DTO对象", required = true) @RequestBody ImsdlProjBoundHydroelectricDTO dto) throws Exception {
+	public Object query(@ApiParam(value = "应用DTO对象", required = true) @RequestBody ImsdlProjBoundHydroelectricDTO dto) {
 		ImsdlProjBoundHydroelectricDTO boundHydroelectricByExtId = imsdlProjBoundHydroelectricService.getBoundHydroelectricByExtId(dto.getId());
         boundHydroelectricByExtId.setCompPrice(new BigDecimal("124"));
-        RedisUtil.setJson("keys", JSON.toJSONString(boundHydroelectricByExtId),100000L);
+        RedisUtil.addBoundSetOps("keys", JSON.toJSONString(boundHydroelectricByExtId));
 		return renderSuccess(boundHydroelectricByExtId);
 	}
 
@@ -51,7 +50,6 @@ public class ImsdlProjBoundHydroelectricController extends BaseController {
 	@ApiOperation(value = "更新")
 	@PostMapping(value = { "/update" })
 	public Object update(@ApiParam(value = "应用DTO对象", required = true) @RequestBody ImsdlProjBoundHydroelectricDTO dto) throws Exception {
-		//Assert.isNotBlank("", "");
 		int i = imsdlProjBoundHydroelectricService.update(dto);
 		return renderSuccess(i);
 	}
@@ -64,10 +62,6 @@ public class ImsdlProjBoundHydroelectricController extends BaseController {
 	@ApiOperation(value = "新增")
 	@PostMapping(value = { "/add" })
 	public Object add(@ApiParam(value = "DTO对象", required = true) @RequestBody ImsdlProjBoundHydroelectricDTO dto) throws Exception {
-		//Assert.isNotBlank("", "");
-		//dto.setCreatedBy(LoginUserSessionHelper.getLoginUserDTO(request).getUserId());
-		//dto.setCreatedAt(new Date());
-		//dto.setAppId(IdCreater.newId());
 		imsdlProjBoundHydroelectricService.insert(dto);
 		return renderSuccess();
 	}
@@ -97,7 +91,6 @@ public class ImsdlProjBoundHydroelectricController extends BaseController {
 			@ApiImplicitParam(name = "param", value = "{ \"ids\":\"1,2,3\"}", required = true, dataType = "") })
 	public Object delete(@RequestBody Map<String, String> idsMap) throws Exception {
 		String ids = idsMap.get("ids");
-		//Assert.isNotBlank(ids, "");
 		int i = imsdlProjBoundHydroelectricService.deleteBatch(Arrays.asList(ids.split(",")));
 		return renderSuccess(i);
 	}
