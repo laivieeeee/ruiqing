@@ -8,6 +8,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableDiscoveryClient
+@EnableSwagger2
 @MapperScan(basePackages = "com.ruiqing.dao")
 public class RqItemService {
     public static void main(String[] args) {

@@ -26,7 +26,7 @@ public class SwaggerConfiguration {
                 .forCodeGeneration(true)
                 .globalOperationParameters(createGlobalParams())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.crc.imsdl.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.ruiqing.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
