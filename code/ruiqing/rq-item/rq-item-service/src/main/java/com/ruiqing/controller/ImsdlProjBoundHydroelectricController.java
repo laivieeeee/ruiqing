@@ -1,5 +1,6 @@
 package com.ruiqing.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.ruiqing.common.utils.RedisUtil;
 import com.ruiqing.dto.ImsdlProjBoundHydroelectricDTO;
 import com.ruiqing.dto.base.CommonPageDTO;
@@ -39,7 +40,7 @@ public class ImsdlProjBoundHydroelectricController extends BaseController {
 	public Object query(@ApiParam(value = "应用DTO对象", required = true) @RequestBody ImsdlProjBoundHydroelectricDTO dto) throws Exception {
 		ImsdlProjBoundHydroelectricDTO boundHydroelectricByExtId = imsdlProjBoundHydroelectricService.getBoundHydroelectricByExtId(dto.getId());
         boundHydroelectricByExtId.setCompPrice(new BigDecimal("124"));
-        RedisUtil.set("keys","ljz");
+        RedisUtil.setJson("keys", JSON.toJSONString(boundHydroelectricByExtId),100000L);
 		return renderSuccess(boundHydroelectricByExtId);
 	}
 
