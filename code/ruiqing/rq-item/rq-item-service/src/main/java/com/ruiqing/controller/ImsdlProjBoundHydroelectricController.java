@@ -1,5 +1,6 @@
 package com.ruiqing.controller;
 
+import com.ruiqing.common.utils.RedisUtil;
 import com.ruiqing.dto.ImsdlProjBoundHydroelectricDTO;
 import com.ruiqing.dto.base.CommonPageDTO;
 import com.ruiqing.service.ImsdlProjBoundHydroelectricService;
@@ -9,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -36,6 +38,8 @@ public class ImsdlProjBoundHydroelectricController extends BaseController {
 	@PostMapping("/query")
 	public Object query(@ApiParam(value = "应用DTO对象", required = true) @RequestBody ImsdlProjBoundHydroelectricDTO dto) throws Exception {
 		ImsdlProjBoundHydroelectricDTO boundHydroelectricByExtId = imsdlProjBoundHydroelectricService.getBoundHydroelectricByExtId(dto.getId());
+        boundHydroelectricByExtId.setCompPrice(new BigDecimal("124"));
+        RedisUtil.set("keys","ljz");
 		return renderSuccess(boundHydroelectricByExtId);
 	}
 

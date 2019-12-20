@@ -5,6 +5,8 @@ import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
@@ -20,11 +22,11 @@ public class RedisUtil {
 	private static Logger logger = LoggerFactory.getLogger(RedisUtil.class);
 
 	@SuppressWarnings("unchecked")
-	/*private static RedisTemplate<String, Object> redisTemplate = SpringUtils.getBean("redisTemplate",
-			RedisTemplate.class);*/
+	private static RedisTemplate<String, Object> redisTemplate = SpringUtils.getBean("redisTemplate",
+			RedisTemplate.class);
 
-	/*private static StringRedisTemplate stringRedisTemplate = SpringUtils.getBean("stringRedisTemplate",
-			StringRedisTemplate.class);*/
+	private static StringRedisTemplate stringRedisTemplate = SpringUtils.getBean("stringRedisTemplate",
+			StringRedisTemplate.class);
 
 	/**
 	 * 删除缓存<br>
@@ -64,10 +66,10 @@ public class RedisUtil {
 	 * @return
 	 */
 	public static Integer getInt(String key) {
-		/*String value = stringRedisTemplate.boundValueOps(key).get();
+		String value = stringRedisTemplate.boundValueOps(key).get();
 		if (StringUtils.isNotBlank(value)) {
 			return Integer.valueOf(value);
-		}*/
+		}
 		return null;
 	}
 
@@ -77,9 +79,9 @@ public class RedisUtil {
 	 * @param key
 	 * @return
 	 */
-	/*public static String getStr(String key) {
+	public static String getStr(String key) {
 		return stringRedisTemplate.boundValueOps(key).get();
-	}*/
+	}
 
 	/**
 	 * 取得缓存（字符串类型）
@@ -87,13 +89,13 @@ public class RedisUtil {
 	 * @param key
 	 * @return
 	 */
-	/*public static String getStr(String key, boolean retain) {
+	public static String getStr(String key, boolean retain) {
 		String value = stringRedisTemplate.boundValueOps(key).get();
 		if (!retain) {
 			redisTemplate.delete(key);
 		}
 		return value;
-	}*/
+	}
 
 	/**
 	 * 获取缓存<br>
@@ -102,9 +104,9 @@ public class RedisUtil {
 	 * @param key
 	 * @return
 	 */
-	/*public static Object getObj(String key) {
-		return redisTemplate.boundValueOps(key).get();
-	}*/
+	public static Object getObj(String key) {
+	return redisTemplate.boundValueOps(key).get();
+	}
 
 	/**
 	 * 获取缓存<br>
@@ -175,7 +177,7 @@ public class RedisUtil {
 	 * @param time
 	 *            失效时间(秒)
 	 */
-	/*public static void set(String key, Object value, long time) {
+	public static void set(String key, Object value, long time) {
 		if (value.getClass().equals(String.class) || value.getClass().equals(Integer.class)
 				|| value.getClass().equals(Double.class) || value.getClass().equals(Float.class)
 				|| value.getClass().equals(Short.class) || value.getClass().equals(Long.class)
@@ -191,7 +193,7 @@ public class RedisUtil {
 			}
 		}
 		
-	}*/
+	}
 
 	/**
 	 * 将value对象写入缓存
@@ -201,7 +203,7 @@ public class RedisUtil {
 	 * @param time
 	 *            失效时间(秒)
 	 */
-	/*public static void set(String key, Object value) {
+	public static void set(String key, Object value) {
 		if (value.getClass().equals(String.class)) {
 			stringRedisTemplate.opsForValue().set(key, value.toString());
 		} else if (value.getClass().equals(Integer.class)) {
@@ -219,7 +221,7 @@ public class RedisUtil {
 		} else {
 			redisTemplate.opsForValue().set(key, value);
 		}
-	}*/
+	}
 
 	/**
 	 * 将value对象以JSON格式写入缓存

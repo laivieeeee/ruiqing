@@ -82,9 +82,12 @@
             <groupId>com.ruiqing.common</groupId>
             <artifactId>rq-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
 
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
