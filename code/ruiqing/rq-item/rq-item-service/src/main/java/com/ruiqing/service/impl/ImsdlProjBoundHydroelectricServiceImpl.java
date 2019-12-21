@@ -4,6 +4,8 @@ package com.ruiqing.service.impl;
 import com.ruiqing.dao.ImsdlProjBoundHydroelectricMapper;
 import com.ruiqing.dto.ImsdlProjBoundHydroelectricDTO;
 import com.ruiqing.service.ImsdlProjBoundHydroelectricService;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
  * @author zouwanchen
  * @since 2019-10-24
  */
+@CacheConfig(cacheNames = "users")
 @Service
 public class ImsdlProjBoundHydroelectricServiceImpl extends BaseServiceImpl<ImsdlProjBoundHydroelectricMapper, ImsdlProjBoundHydroelectricDTO> implements ImsdlProjBoundHydroelectricService {
 
@@ -20,9 +23,9 @@ public class ImsdlProjBoundHydroelectricServiceImpl extends BaseServiceImpl<Imsd
 
 	}
 
+	@Cacheable(key ="#p0")
 	@Override
 	public ImsdlProjBoundHydroelectricDTO getBoundHydroelectricByExtId(String projExtId) {
-		// TODO Auto-generated method stub
 		return mapper.getBoundHydroelectricByExtId(projExtId);
 	}
 

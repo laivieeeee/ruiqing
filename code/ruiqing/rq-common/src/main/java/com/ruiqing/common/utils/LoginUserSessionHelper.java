@@ -597,7 +597,7 @@ public class LoginUserSessionHelper {
 
 		//新方案，强制用户下线会1：清空LOGIN_USER_REDIS_PRE的Map， 2. 删除Constant.LOGIN_USER_REDIS_PRE + userid Map的所有field除了一个mark，用来标识是被强制下线还是timeout
 		// 清空用户缓存
-		RedisUtil.del(Constant.LOGIN_USER_REDIS_PRE + userid);
+		RedisUtil.deleteByKey(Constant.LOGIN_USER_REDIS_PRE + userid);
 		// 删除用户信息数据
 		//RedisUtil.delMapField(Constant.LOGIN_USER_REDIS_PRE, userid);
 
@@ -641,7 +641,7 @@ public class LoginUserSessionHelper {
 	public static void cleanTimeoutUser(String userid) {
 		//新方案，Timeout user会1：清空LOGIN_USER_REDIS_PRE的Map， 2. 删除Constant.LOGIN_USER_REDIS_PRE + userid Map的所有field
 		// 清空用户缓存
-		RedisUtil.del(Constant.LOGIN_USER_REDIS_PRE + userid);
+		RedisUtil.deleteByKey(Constant.LOGIN_USER_REDIS_PRE + userid);
 		// 删除用户信息数据
 		//RedisUtil.delMapField(Constant.LOGIN_USER_REDIS_PRE, userid);
 	}
@@ -655,7 +655,7 @@ public class LoginUserSessionHelper {
 		//新方案，logout user会1：清空LOGIN_USER_REDIS_PRE的Map， 2. 删除Constant.LOGIN_USER_REDIS_PRE + userid Map的所有field
 
 		// 清空用户缓存
-		RedisUtil.del(Constant.LOGIN_USER_REDIS_PRE + userid);
+		RedisUtil.deleteByKey(Constant.LOGIN_USER_REDIS_PRE + userid);
 		// 删除用户信息数据
 		//RedisUtil.delMapField(Constant.LOGIN_USER_REDIS_PRE, userid);
 	}
@@ -664,7 +664,7 @@ public class LoginUserSessionHelper {
 		markUserState(userid, Constant.SYSTEM_USER_INVALID_REASON, Constant.SYSTEM_USER_OFFSITE_LOGON);
 		//新方案，new login 之前会1：清空LOGIN_USER_REDIS_PRE的Map， 2. 删除Constant.LOGIN_USER_REDIS_PRE + userid Map的所有field
 		// 清空用户缓存
-		RedisUtil.del(Constant.LOGIN_USER_REDIS_PRE + userid);
+		RedisUtil.deleteByKey(Constant.LOGIN_USER_REDIS_PRE + userid);
 		// 删除用户信息数据
 		//RedisUtil.delMapField(Constant.LOGIN_USER_REDIS_PRE, userid);
 
