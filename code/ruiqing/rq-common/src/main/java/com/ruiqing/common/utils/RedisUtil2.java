@@ -15,6 +15,11 @@ import java.util.concurrent.TimeUnit;
 /**
  * @Author: Lai JianZheng
  * @Date: 2019/12/21 12:03
+ * @CacheConfig: 类级别缓存，设置缓存 key 前缀之类的
+ * @Cacheable: 触发缓存入口
+ * @CacheEvict: 触发移除缓存
+ * @CachePut: 更新缓存
+ * @Caching: 组合缓存
  */
 @Component
 public class RedisUtil2 {
