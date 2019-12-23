@@ -3,16 +3,21 @@ package com.ruiqing.controller;
 import com.alibaba.fastjson.JSON;
 import com.ruiqing.common.utils.RedisUtil;
 import com.ruiqing.dto.ImsdlProjBoundHydroelectricDTO;
+import com.ruiqing.dto.SortDTO;
 import com.ruiqing.service.ImsdlProjBoundHydroelectricService;
 import io.swagger.annotations.*;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -90,10 +95,34 @@ public class ImsdlProjBoundHydroelectricController extends BaseController {
 	@PostMapping(value = "/delete")
 	@ApiImplicitParams({
 			@ApiImplicitParam(name = "param", value = "{ \"ids\":\"1,2,3\"}", required = true, dataType = "") })
-	public Object delete(@RequestBody Map<String, String> idsMap) throws Exception {
-		String ids = idsMap.get("ids");
+	public Object delete(@RequestBody Map<String, Object> idsMap) throws Exception {
+		String ids = (String) idsMap.get("ids");
+		Object o = idsMap.get("dd");
+		SortDTO sortDTO = new SortDTO();
+		BeanUtils.copyProperties(idsMap.get("ddd"), sortDTO);
+		if(o!=null){
+			SortDTO dd = JSON.parseObject(JSON.toJSONString(o), SortDTO.class);
+			if(ObjectUtils.anyNotNull(dd)){
+				dd.getFieldName();
+
+			}
+			dd.getFieldName();
+			System.out.println("ddd"+dd.getFieldName());
+		}
 		int i = imsdlProjBoundHydroelectricService.deleteBatch(Arrays.asList(ids.split(",")));
 		return renderSuccess(i);
+	}
+
+	public static void main(String[] args) {
+		Map<String, Object> idsMap = new HashMap<>();
+		idsMap.put("dd","");
+		Object o = idsMap.get("dd");
+		if(o!= null){
+			SortDTO dd = JSON.parseObject(JSON.toJSONString(o), SortDTO.class);
+			System.out.println("1"+o);
+		}else{
+			System.out.println("2"+o);
+		}
 	}
 }
 
