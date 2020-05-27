@@ -3,7 +3,15 @@ package com.ruiqing.common.utils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
 
 /**
  * REDIS分布式锁工具类
@@ -12,10 +20,11 @@ public class RedisLockUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(RedisLockUtil.class);
 
-    @SuppressWarnings("unchecked")
+   /* @SuppressWarnings("unchecked")
     private static RedisTemplate<String, Object> redisTemplate =
-            SpringUtils.getBean("redisTemplate", RedisTemplate.class);
+            SpringUtils.getBean("redisTemplate", RedisTemplate.class);*/
 
+    private static RedisTemplate redisTemplate = new RedisTemplate();
     private static long lockTimeout = 5 * 60 * 1000; //锁定时间
 
     /**
@@ -61,6 +70,44 @@ public class RedisLockUtil {
             }
         } catch (Exception e) {
             logger.error("【redis分布式锁】 解锁异常" + e.getMessage());
+        }
+    }
+
+    public static void main(String[] args) {
+        //redisPool();
+        // 获取当前线程路径
+        StackTraceElement stackTraceElement = Thread.currentThread().getStackTrace()[1];
+        // 当前执行方法的类名+方法名作为锁的key
+        String key = StringUtils.joinWith(".", stackTraceElement.getClassName(), stackTraceElement.getMethodName());
+        long currentTimeMillis = System.currentTimeMillis();
+        if (RedisLockUtil.lock(key, currentTimeMillis)) {
+            logger.info("执行任务");
+            RedisLockUtil.unlock(key, currentTimeMillis);
+        }
+    }
+
+    public static void redisPool() {
+        JedisPoolConfig config = new JedisPoolConfig();
+        //最大连接数
+        config.setMaxTotal(30);
+        //最大连接空闲数
+        config.setMaxIdle(2);
+
+        JedisPool pool = new JedisPool(config, "127.0.0.1", 6379);
+        Jedis jedis = null;
+
+        try  {
+            jedis = pool.getResource();
+            jedis.set("name", "lisi");
+            String name = jedis.get("name");
+            System.out.println(name);
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }finally{
+            if(jedis != null){
+                //关闭连接
+                jedis.close();
+            }
         }
     }
 }

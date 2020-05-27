@@ -1,5 +1,5 @@
 server:
-  port: 7061
+  port: 5861
 spring:
   application:
     name: rq-registry

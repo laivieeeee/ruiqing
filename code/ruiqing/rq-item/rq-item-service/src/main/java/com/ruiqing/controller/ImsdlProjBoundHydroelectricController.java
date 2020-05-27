@@ -1,6 +1,7 @@
 package com.ruiqing.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.ruiqing.annotation.LoggerTest;
 import com.ruiqing.common.utils.RedisUtil;
 import com.ruiqing.dto.ImsdlProjBoundHydroelectricDTO;
 import com.ruiqing.dto.SortDTO;
@@ -42,6 +43,7 @@ public class ImsdlProjBoundHydroelectricController extends BaseController {
 	 */
 	@ApiOperation(value = "查询列表")
 	@PostMapping("/query")
+	@LoggerTest
 	public Object query(@ApiParam(value = "应用DTO对象", required = true) @RequestBody ImsdlProjBoundHydroelectricDTO dto) {
 		ImsdlProjBoundHydroelectricDTO boundHydroelectricByExtId = imsdlProjBoundHydroelectricService.getBoundHydroelectricByExtId(dto.getId());
         boundHydroelectricByExtId.setCompPrice(new BigDecimal("124"));
