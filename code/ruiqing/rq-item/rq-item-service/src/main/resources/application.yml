@@ -7,17 +7,22 @@ spring:
   application:
     name: item-service
   datasource:
-    driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://10.201.103.141:3306/imsdlsit?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false
-    username: imsdl
-    password: Crpower&Ims#2020
-    hikari:
-      maximum-pool-size: 30
-      minimum-idle: 10
+    #driverClassName: com.mysql.jdbc.Driver
+    #url: jdbc:mysql://10.201.103.141:3306/imsdlsit?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false
+    #username: imsdl
+    #password: Crpower&Ims#2020
+    #hikari:
+      #maximum-pool-size: 30
+      #minimum-idle: 10
+    url: jdbc:postgresql://127.0.0.1:5432/postgres
+    username: postgres
+    password: postgres
+    driverClassName: org.postgresql.Driver
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:7061/eureka/
+      #defaultZone: http://imsdl-eureka:18080/eureka
   instance:
     lease-renewal-interval-in-seconds: 5 # 每隔5秒发送一次心跳
     lease-expiration-duration-in-seconds: 10 # 10秒不发送就过期
