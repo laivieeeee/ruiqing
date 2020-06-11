@@ -3,17 +3,17 @@ package com.ruiqing.controller;
 import com.alibaba.fastjson.JSON;
 import com.ruiqing.annotation.LoggerTest;
 import com.ruiqing.common.utils.RedisUtil;
+import com.ruiqing.dao.ImsdlProjBoundHydroelectricMapper;
 import com.ruiqing.dto.ImsdlProjBoundHydroelectricDTO;
+import com.ruiqing.dto.LaivieUserInfoDTO;
 import com.ruiqing.dto.SortDTO;
 import com.ruiqing.service.ImsdlProjBoundHydroelectricService;
 import io.swagger.annotations.*;
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -35,8 +35,9 @@ public class ImsdlProjBoundHydroelectricController extends BaseController {
 
 	@Autowired
 	private ImsdlProjBoundHydroelectricService imsdlProjBoundHydroelectricService;
-	
-	
+
+	@Autowired
+	private ImsdlProjBoundHydroelectricMapper mapper;
 	
 	/**
 	 * 查询列表
@@ -49,6 +50,16 @@ public class ImsdlProjBoundHydroelectricController extends BaseController {
         boundHydroelectricByExtId.setCompPrice(new BigDecimal("124"));
         RedisUtil.addBoundSetOps("keys", JSON.toJSONString(boundHydroelectricByExtId));
 		return renderSuccess(boundHydroelectricByExtId);
+	}
+	/**
+	 * 查询列表
+	 */
+	@ApiOperation(value = "查询列表")
+	@PostMapping("/LaivieUserInfoById")
+	@LoggerTest
+	public Object LaivieUserInfoById(@ApiParam(value = "应用DTO对象", required = true) @RequestBody LaivieUserInfoDTO dto) throws Exception {
+
+		return renderSuccess(mapper.getUserInfoById("1"));
 	}
 
 	

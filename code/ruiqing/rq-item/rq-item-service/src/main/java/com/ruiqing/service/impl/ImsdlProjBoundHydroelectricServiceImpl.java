@@ -33,7 +33,7 @@ public class ImsdlProjBoundHydroelectricServiceImpl extends BaseServiceImpl<Imsd
 	@Override
 	public void deleteByProjExtId(String projExtId) throws Exception {
 		// TODO Auto-generated method stub
-		mapper.deleteByProjExtId(projExtId);
+		//mapper.deleteByProjExtId(projExtId);
 	}
 
 }

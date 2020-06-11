@@ -46,27 +46,27 @@
 	#{kilowInvestamount},#{kilowOperaCosts},#{pumpingPrice},#{fengWaterPrice},#{flatWaterPrice},#{dryWaterPrice}
 	)
 	</insert>
-	
+
 	<select id="findList" resultMap="BaseResultMap" >
 		SELECT
 		<include refid="Base_Column_List" />
 		FROM imsdl_proj_bound_hydroelectric tm
 		<include refid="Entity_Where_Clause" />
 	</select>
-	
+
 	<update id="update" >
 		UPDATE imsdl_proj_bound_hydroelectric
-	 <set> 
+	 <set>
 	  <if test="projExtId!=null" >
 		  proj_ext_id=#{projExtId},
-	  </if>	
+	  </if>
 	  <if test="projCode!=null" >
 		  proj_code=#{projCode},
-	  </if>	
+	  </if>
 	  total_install_capa=#{totalInstallCapa},
 	  <if test="businessType!=null" >
 		  business_type=#{businessType},
-	  </if>	
+	  </if>
 	  proj_plan_utilhours=#{projPlanUtilhours},
 	  proj_mark_utilhours=#{projMarkUtilhours},
 	  estim_hours=#{estimHours},
@@ -82,96 +82,96 @@
 	 dry_water_price=#{dryWaterPrice},
 	  <if test="createTime!=null" >
 		  create_time=#{createTime},
-	  </if>	
+	  </if>
 	  <if test="createUserId!=null" >
 		  create_user_id=#{createUserId},
-	  </if>	
+	  </if>
 	  <if test="updateTime!=null" >
 		  update_time=#{updateTime},
-	  </if>	
+	  </if>
 	  <if test="updateUserId!=null" >
 		  update_user_id=#{updateUserId},
-	  </if>	
+	  </if>
 	</set>
 	WHERE id=#{id}
 	</update>
-	
-	<select id="getById" resultMap="BaseResultMap" parameterType="java.lang.String" >
-		SELECT 
-	  <include refid="Base_Column_List" />
-	  FROM imsdl_proj_bound_hydroelectric tm WHERE tm.id=#{id}
+
+	<select id="getUserInfoById" parameterType="java.lang.String" resultType="com.ruiqing.dto.LaivieUserInfoDTO">
+		SELECT
+			user_id,
+			NAME,
+			age,
+			birthday
+		FROM
+			laivie_user_info
+		WHERE
+			user_id = #{userId}
 	</select>
-	
+
 	<select id="getBoundHydroelectricByExtId" resultMap="BaseResultMap" parameterType="java.lang.String">
 		SELECT
 		<include refid="Base_Column_List" />
 		FROM imsdl_proj_bound_hydroelectric tm WHERE tm.proj_ext_id=#{projExtId}
 	</select>
-	
-	<delete id="deleteById" parameterType="java.lang.String">
-		DELETE FROM imsdl_proj_bound_hydroelectric WHERE id=#{id}
-	</delete>
-	
-	<delete id="deleteByProjExtId" parameterType="java.lang.String">
-		DELETE FROM imsdl_proj_bound_hydroelectric WHERE proj_ext_id=#{projExtId}
-	</delete>
-	
+
+
+
 	<delete id="batchDelete" parameterType="java.util.List">
 		DELETE FROM  imsdl_proj_bound_hydroelectric WHERE id IN
 	  <foreach item="id" collection="list" open="(" separator="," close=")">
 	  #{id}
 	  </foreach>
 	</delete>
-	
+
 	<sql id="Entity_Where_Clause">
 		<where>
 	      <if test="id!=null and id!=''" >
-		 AND tm.id=#{id} 
-	      </if>	
+		 AND tm.id=#{id}
+	      </if>
 	      <if test="projExtId!=null and projExtId!=''" >
-		 AND tm.proj_ext_id=#{projExtId} 
-	      </if>	
+		 AND tm.proj_ext_id=#{projExtId}
+	      </if>
 	      <if test="projCode!=null and projCode!=''" >
-		 AND tm.proj_code=#{projCode} 
-	      </if>	
+		 AND tm.proj_code=#{projCode}
+	      </if>
 	      <if test="totalInstallCapa!=null and totalInstallCapa!=''" >
-		 AND tm.total_install_capa=#{totalInstallCapa} 
-	      </if>	
+		 AND tm.total_install_capa=#{totalInstallCapa}
+	      </if>
 	      <if test="businessType!=null and businessType!=''" >
-		 AND tm.business_type=#{businessType} 
-	      </if>	
+		 AND tm.business_type=#{businessType}
+	      </if>
 	      <if test="projPlanUtilhours!=null and projPlanUtilhours!=''" >
-		 AND tm.proj_plan_utilhours=#{projPlanUtilhours} 
-	      </if>	
+		 AND tm.proj_plan_utilhours=#{projPlanUtilhours}
+	      </if>
 	      <if test="projMarkUtilhours!=null and projMarkUtilhours!=''" >
-		 AND tm.proj_mark_utilhours=#{projMarkUtilhours} 
-	      </if>	
+		 AND tm.proj_mark_utilhours=#{projMarkUtilhours}
+	      </if>
 	      <if test="estimHours!=null and estimHours!=''" >
-		 AND tm.estim_hours=#{estimHours} 
-	      </if>	
+		 AND tm.estim_hours=#{estimHours}
+	      </if>
 	      <if test="projPlanUtilprice!=null and projPlanUtilprice!=''" >
-		 AND tm.proj_plan_utilprice=#{projPlanUtilprice} 
-	      </if>	
+		 AND tm.proj_plan_utilprice=#{projPlanUtilprice}
+	      </if>
 	      <if test="projMarkUtilprice!=null and projMarkUtilprice!=''" >
-		 AND tm.proj_mark_utilprice=#{projMarkUtilprice} 
-	      </if>	
+		 AND tm.proj_mark_utilprice=#{projMarkUtilprice}
+	      </if>
 	      <if test="compPrice!=null and compPrice!=''" >
-		 AND tm.comp_price=#{compPrice} 
-	      </if>	
+		 AND tm.comp_price=#{compPrice}
+	      </if>
 	      <if test="yearCapacityElectricityCharge!=null and yearCapacityElectricityCharge!=''" >
-		 AND tm.year_capacity_electricity_charge=#{yearCapacityElectricityCharge} 
-	      </if>	
+		 AND tm.year_capacity_electricity_charge=#{yearCapacityElectricityCharge}
+	      </if>
 	      <if test="createTime!=null " >
-		 AND tm.create_time=#{createTime} 
-	      </if>	
+		 AND tm.create_time=#{createTime}
+	      </if>
 	      <if test="createUserId!=null and createUserId!=''" >
-		 AND tm.create_user_id=#{createUserId} 
-	      </if>	
+		 AND tm.create_user_id=#{createUserId}
+	      </if>
 	      <if test="updateTime!=null " >
-		 AND tm.update_time=#{updateTime} 
-	      </if>	
+		 AND tm.update_time=#{updateTime}
+	      </if>
 	      <if test="updateUserId!=null and updateUserId!=''" >
-		 AND tm.update_user_id=#{updateUserId} 
+		 AND tm.update_user_id=#{updateUserId}
 	      </if>
 	     <if test="kilowInvestamount!=null and kilowInvestamount!=''" >
 		 AND tm.kilow_investamount=#{kilowInvestamount}
@@ -192,7 +192,7 @@
 		 AND tm.dry_water_price=#{dryWaterPrice}
 	      </if>
 	  </where>
-	
+
 	</sql>
 	
 </mapper>

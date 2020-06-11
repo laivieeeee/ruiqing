@@ -7,9 +7,8 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-public interface ImsdlProjBoundHydroelectricMapper extends BaseMapper<ImsdlProjBoundHydroelectricDTO> {
+public interface LaivieUserInfoMapper extends BaseMapper<ImsdlProjBoundHydroelectricDTO> {
 	
-	ImsdlProjBoundHydroelectricDTO getBoundHydroelectricByExtId(@Param("projExtId") String projExtId);
 
 	List<LaivieUserInfoDTO> getUserInfoById(@Param("userId") String userId) throws Exception;
 }

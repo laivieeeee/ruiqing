@@ -27,7 +27,21 @@ import org.springframework.core.env.Environment;
  * 3.application.yml中添加jasypt.encryptor.password=key<br/>
  * 4.原来application.yml中的密码配置如spring.redis.password=123456改为spring.redis.password=ENC(uNEKwHoVRkJhdqbjPrMaUA==)
  * @author pact
+ *1.pom.xml增加配置
+ * <dependency>
+ * <groupId>com.github.ulisesbocchio</groupId>
+ * <artifactId>jasypt-spring-boot-starter</artifactId>
+ * <version>2.0.0</version>
+ * </dependency>
  *
+ * 2.增加JasyptStringEncryptor.java 文件
+ * 3.调用JasyptStringEncryptor将密码进行加密
+ * 4.在yml文件中，增加配置
+ * jasypt:
+ * encryptor:
+ * password: B2164579180B
+ *
+ * 并将密码替换成 ENC(vmwy0XS1RLay2q2ec9Oeag==) 即可
  */
 public class JasyptStringEncryptor implements StringEncryptor {
 

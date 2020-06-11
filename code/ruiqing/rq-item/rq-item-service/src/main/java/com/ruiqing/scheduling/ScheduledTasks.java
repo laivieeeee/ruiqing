@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Component
 public class ScheduledTasks {
-    @Scheduled(cron = "0 0/5 * * * ?")
+    @Scheduled(cron = "0 0/55 * * * ?")
     public void taskCustomReports() {
         String name = Thread.currentThread().getName();
         if (RedisLockUtil.lock(name,10000)){
