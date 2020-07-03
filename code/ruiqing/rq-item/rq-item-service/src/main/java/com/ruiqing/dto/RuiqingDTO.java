@@ -1,6 +1,6 @@
 package com.ruiqing.dto;
 
-import com.ruiqing.entity.ImsdlProjBoundHydroelectric;
+import com.ruiqing.entity.Ruiqing;
 import io.swagger.annotations.ApiModel;
 
 /**
@@ -10,6 +10,6 @@ import io.swagger.annotations.ApiModel;
  *
  */
 @ApiModel(description="")
-public class ImsdlProjBoundHydroelectricDTO extends ImsdlProjBoundHydroelectric {
+public class RuiqingDTO extends Ruiqing {
 	
 }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ruiqing.dao.RuiqingMapper">
+	<insert id="insertRuiqingInfo">
+		insert into
+		ruiqing_info(ruiqing_id, name) values (#{ruiqingId},#{name})
+	</insert>
+	<update id="updateRuiqingInfo">
+		update
+
+			ruiqing_info
+			set
+			 name = #{name}
+			 where
+			 ruiqing_id = #{ruiqingId}
+	</update>
+	<delete id="deleteRuiqingInfo">
+		delete from ruiqing_info where ruiqing_id = #{ruiqingId}
+	</delete>
+
+	<select id="getRuiqingInfo" parameterType="com.ruiqing.dto.RuiqingDTO" resultType="com.ruiqing.dto.RuiqingDTO">
+		SELECT
+			name,
+			ruiqing_id ruiqingId
+		FROM
+			ruiqing_info
+		WHERE
+			ruiqing_id = #{ruiqingId}
+	</select>
+
+</mapper>
+

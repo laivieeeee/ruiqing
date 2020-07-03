@@ -1,6 +1,6 @@
 package com.ruiqing.service;
 
-import com.ruiqing.entity.PolicyModel;
+import com.ruiqing.dto.RuiqingDTO;
 import com.ruiqing.entity.TaskResponseModel;
 
 /**
@@ -9,5 +9,5 @@ import com.ruiqing.entity.TaskResponseModel;
  */
 
 public interface InsuranceVerificationService {
-    TaskResponseModel<Object> insuranceCheck(String key, PolicyModel policyModel);
+    TaskResponseModel<Object> insuranceCheck(String key, RuiqingDTO ruiqingDTO);
 }
