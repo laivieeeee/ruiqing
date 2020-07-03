@@ -28,7 +28,7 @@ import java.util.Map;
  */
 @RestController
 @Api(value = "", tags = "测试水电")
-@RequestMapping("/imsdlProjBoundHydroelectric")
+@RequestMapping("/ruiqing")
 public class ImsdlProjBoundHydroelectricController extends BaseController {
 	/** 记录日志 */
 	private static final Logger logger = LoggerFactory.getLogger(ImsdlProjBoundHydroelectricController.class);
@@ -43,13 +43,18 @@ public class ImsdlProjBoundHydroelectricController extends BaseController {
 	 * 查询列表
 	 */
 	@ApiOperation(value = "查询列表")
-	@PostMapping("/query")
+	@PostMapping("/find")
 	@LoggerTest
-	public Object query(@ApiParam(value = "应用DTO对象", required = true) @RequestBody ImsdlProjBoundHydroelectricDTO dto) {
-		ImsdlProjBoundHydroelectricDTO boundHydroelectricByExtId = imsdlProjBoundHydroelectricService.getBoundHydroelectricByExtId(dto.getId());
-        boundHydroelectricByExtId.setCompPrice(new BigDecimal("124"));
-        RedisUtil.addBoundSetOps("keys", JSON.toJSONString(boundHydroelectricByExtId));
-		return renderSuccess(boundHydroelectricByExtId);
+	public Object find(@ApiParam(value = "应用DTO对象", required = true) @RequestBody ImsdlProjBoundHydroelectricDTO dto) {
+		try {
+
+			ImsdlProjBoundHydroelectricDTO boundHydroelectricByExtId = imsdlProjBoundHydroelectricService.getBoundHydroelectricByExtId(dto.getId());
+			boundHydroelectricByExtId.setCompPrice(new BigDecimal("124"));
+			//RedisUtil.addBoundSetOps("keys", JSON.toJSONString(boundHydroelectricByExtId));
+			return renderSuccess(boundHydroelectricByExtId);
+		} catch (Exception e ){
+			return renderError(e.getMessage());
+		}
 	}
 	/**
 	 * 查询列表
