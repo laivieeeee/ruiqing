@@ -1,6 +1,7 @@
 package com.ruiqing.common.utils;
 
 import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
@@ -10,14 +11,16 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.*;
 import java.util.Map.Entry;
-
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFFont;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.util.CellRangeAddress;
 /**
  * @ClassName: ExcelUtil
  * @Description: excel文件操作工具类
@@ -285,5 +288,4 @@ public class ExcelUtil {
 		Calendar cl = new GregorianCalendar();
 		return sdf.format(cl.getTime());
 	}
-	
 }

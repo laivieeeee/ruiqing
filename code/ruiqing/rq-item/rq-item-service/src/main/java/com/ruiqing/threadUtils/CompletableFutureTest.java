@@ -21,6 +21,7 @@ public class CompletableFutureTest {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            System.out.println("说你傻你还不信");
             return "一点都不好";
         });
         System.out.println(hahaha.get());
