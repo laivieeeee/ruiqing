@@ -2,6 +2,8 @@ package com.ruiqing.demo;
 
 import org.apache.poi.ss.formula.functions.T;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * @Author: Lai JianZheng
  * @Date: 2020/7/21 14:48
@@ -139,7 +141,7 @@ public class ThreadSave implements Runnable{
 
         t2.join();
 
-
+        TimeUnit.SECONDS.sleep(1000);
         System.out.println(num);
     }
 }
