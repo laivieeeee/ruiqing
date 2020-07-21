@@ -33,6 +33,7 @@ public class Daemon {
     public static void main(String[] args) {
 
         T1 t1 = new T1("子线程1");
+        //设置守护线程，需要在start()方法之前进行
         t1.setDaemon(true);//true是守护线程(当系统只剩下守护进程的时候，java虚拟机会自动退出)，false是用户线程
         t1.start();
 
