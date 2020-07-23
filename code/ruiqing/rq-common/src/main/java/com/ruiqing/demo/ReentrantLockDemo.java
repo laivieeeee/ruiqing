@@ -5,6 +5,7 @@ package com.ruiqing.demo;
  * @Date: 2020/7/21 15:22
  */
 
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -31,6 +32,36 @@ public class ReentrantLockDemo {
                 //ReentrantLockDemo.addSynchronized();
                 ReentrantLockDemo.addReentrantLock();
             }
+
+            try {
+                if (this.lock == 1) {
+                    lock1.lockInterruptibly();
+                    TimeUnit.SECONDS.sleep(1);
+                    lock2.lockInterruptibly();
+                } else {
+                    lock2.lockInterruptibly();
+                    TimeUnit.SECONDS.sleep(1);
+                    lock1.lockInterruptibly();
+                }
+            } catch (InterruptedException e) {
+                System.out.println("中断标志:" + this.isInterrupted());
+                e.printStackTrace();
+            } finally {
+                if (lock1.isHeldByCurrentThread()) {
+                    lock1.unlock();
+                }
+                if (lock2.isHeldByCurrentThread()) {
+                    lock2.unlock();
+                }
+            }
+        }
+        int lock;
+        public T(String name, int lock) {
+            super(name);
+            this.lock = lock;
+        }
+
+        public T() {
         }
     }
     private static ReentrantLock lock = new ReentrantLock();//默认非公平锁
@@ -57,6 +88,8 @@ public class ReentrantLockDemo {
             lock.unlock();
         }
     }
+    private static ReentrantLock lock1 = new ReentrantLock(false);
+    private static ReentrantLock lock2 = new ReentrantLock(false);
     public static void main(String[] args) throws InterruptedException {
         T t1 = new T();
         T t2 = new T();
@@ -68,6 +101,11 @@ public class ReentrantLockDemo {
         t2.join();
         t3.join();
         System.out.println(ReentrantLockDemo.num);
-
+        T t4 = new T("t4", 1);
+        T t5 = new T("t5", 2);
+        t4.start();
+        t5.start();
+        TimeUnit.SECONDS.sleep(5);
+        t5.interrupt();
     }
 }
