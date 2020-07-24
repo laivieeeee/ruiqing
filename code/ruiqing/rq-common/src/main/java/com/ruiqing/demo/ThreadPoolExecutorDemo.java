@@ -57,7 +57,7 @@ public class ThreadPoolExecutorDemo {
             Executors.defaultThreadFactory(),
             new ThreadPoolExecutor.AbortPolicy());
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         for (int i = 0; i < 100; i++) {
             int j = i;
             String taskName = "任务" + j;
@@ -73,5 +73,49 @@ public class ThreadPoolExecutorDemo {
         }
         //关闭线程池
         executor.shutdown();
+        System.out.println(System.currentTimeMillis());
+        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(10);
+       /* scheduledExecutorService.schedule(() -> {
+            System.out.println(System.currentTimeMillis() + "开始执行");
+            //模拟任务耗时
+            try {
+                TimeUnit.SECONDS.sleep(3);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(System.currentTimeMillis() + "执行结束");
+        }, 2, TimeUnit.SECONDS);
+        //固定的频率执行任务
+        scheduledExecutorService.scheduleAtFixedRate(() -> {
+            System.out.println(System.currentTimeMillis() + "开始执行");
+            //模拟任务耗时
+            try {
+                TimeUnit.SECONDS.sleep(3);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(System.currentTimeMillis() + "执行结束");
+        }, 2, 2, TimeUnit.SECONDS);*/
+        //固定的间隔执行任务
+        ScheduledFuture<?> scheduledFuture = scheduledExecutorService.scheduleWithFixedDelay(() -> {
+            System.out.println(System.currentTimeMillis() + "开始执行");
+            //模拟任务耗时
+            try {
+                TimeUnit.SECONDS.sleep(3);
+                int dd = 1 / 0;
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(System.currentTimeMillis() + "执行结束");
+        }, 2, 2, TimeUnit.SECONDS);
+
+        TimeUnit.SECONDS.sleep(6);
+        boolean done = scheduledFuture.isDone();
+        if (done) {
+            System.out.println("异常");
+            scheduledFuture.cancel(true);
+        } else {
+            System.out.println("无异常");
+        }
     }
 }
