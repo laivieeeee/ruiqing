@@ -49,4 +49,8 @@ public class RuiqingServiceImpl extends BaseServiceImpl<RuiqingMapper, RuiqingDT
 	public Integer deleteRuiqingInfo(String ruiqingId) {
 		return ruiqingMapper.deleteRuiqingInfo(ruiqingId);
 	}
+	@Override
+	public void dd (String dd) {
+		System.out.println("你好啊" + dd);
+	}
 }

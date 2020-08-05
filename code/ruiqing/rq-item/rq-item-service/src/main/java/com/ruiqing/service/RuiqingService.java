@@ -20,4 +20,5 @@ public interface RuiqingService extends BaseService<RuiqingDTO> {
 	void insertRuiqingInfo(RuiqingDTO dto);
 
 	Integer deleteRuiqingInfo(String ruiqingId);
+	void dd (String dd);
 }
