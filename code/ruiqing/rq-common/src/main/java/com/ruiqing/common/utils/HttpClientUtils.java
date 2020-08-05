@@ -316,10 +316,6 @@ public class HttpClientUtils {
 			url = builder.build().toString();
 		}
 		HttpPost httpPost = new HttpPost(url);
-		// httpPost.addHeader("crctoken",
-		// "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyaWQiOiIxMUMzNTBEN0ZBRTQ0M0Q2OEM2MDhFQTNERkI4MkNFNiM4MzAwNUIxNUNCMTY0NTY0QUVGMEY5QjE3MzYwMzE3NiIsIm5iZiI6MTU3NTI2ODc3MH0.s-H3gSTIkRp471FOM0KCbaembluH1dqkqGolbOa7W2k#NUEwREYxMjZCNTkwMjBFQjZEQUE4MzEzN0YxQkMwNTU");
-		// httpPost.addHeader("Accept-Charset", "UTF-8");
-		// httpPost.setHeader("Content-Type", "multipart/form-data");
 
 		log.info("执行POST请求，URL = " + url);
 		MultipartEntityBuilder multipartEntityBuilder = MultipartEntityBuilder.create();
