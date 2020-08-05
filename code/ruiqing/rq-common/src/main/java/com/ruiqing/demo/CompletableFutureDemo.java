@@ -4,6 +4,8 @@ import com.ruiqing.dto.SortDTO;
 
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.function.*;
 
@@ -17,56 +19,23 @@ import java.util.function.*;
 
 public class CompletableFutureDemo {
     public static void main(String[] args) throws Exception {
-
-        CompletableFuture<Void> voidCompletableFuture = CompletableFuture.runAsync(() -> {
-            try {
-                TimeUnit.SECONDS.sleep(2);
-                System.out.println("222");
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
-        System.out.println("11111");
-        voidCompletableFuture.get();
-
-        SortDTO dto = new SortDTO();
-        dto.setFieldName("ddd");
-        CompletableFuture<String> f1 = CompletableFuture.supplyAsync(dto::getFieldName)
-                .thenCompose((param) -> CompletableFuture.supplyAsync(() -> param + ":thenCompose"));
-        TimeUnit.SECONDS.sleep(1);
-        dto.setFieldName("aaa");
-        CompletableFuture<String> f2 = CompletableFuture.supplyAsync(() -> {
-           // int i = 1 / 0;
-            try {
-                TimeUnit.SECONDS.sleep(5);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            return dto.getFieldName();
-        });
-
-        // get()方法会阻塞，一般放到最后执行
-        System.out.println(f1.get() + "----" + f2.get());
-
-        f1.runAfterEither(f2, () -> {
-            try {
-                //f1,f2都完成了才会执行下一步的操作（Runnable）
-                System.out.println("f1,f2任意一个执行完成都进行下一步的操作（runAfterEither）" + f1.get() + "--");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-        f1.runAfterBoth(f2, () -> {
-            try {
-                //f1,f2都完成了才会执行下一步的操作（Runnable）
-                System.out.println("f1,f2都完成了才会执行下一步的操作（runAfterBoth）" + f1.get() + "--" + f2.get());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-
+        System.out.println("1");
+        Future<String> dd = dd("lj");
+        System.out.println("4"+dd.get());
     }
 
+    private static Future<String> dd (String str) throws ExecutionException, InterruptedException {
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                System.out.println("2");
+                TimeUnit.SECONDS.sleep(3);
+                System.out.println("3");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return str;
+        });
+    }
     private static void thenCompose() throws Exception {
         //thenCompose 方法允许你对两个 CompletionStage 进行流水线操作，第一个操作完成时，将其结果作为参数传递给第二个操作。
         CompletableFuture<Integer> f = CompletableFuture.supplyAsync(() -> {
