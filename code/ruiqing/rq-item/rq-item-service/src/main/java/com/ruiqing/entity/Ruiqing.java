@@ -6,8 +6,6 @@ import lombok.Data;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.math.BigDecimal;
-import java.util.Date;
 
 @Entity(name="ruiqing_info")
 @Data
@@ -26,6 +24,24 @@ public class Ruiqing extends BaseEntity{
      */
 	@Column(name = "name")
 	private String name;
+
+    /**
+     * code
+     */
+	@Column(name = "code")
+	private String code;
+
+    /**
+     * pinyin
+     */
+	@Column(name = "pinyin")
+	private String pinyin;
+
+    /**
+     * status
+     */
+	@Column(name = "status")
+	private String status;
 
 
 

@@ -1,26 +1,22 @@
 package com.ruiqing.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.ruiqing.annotation.LoggerTest;
-import com.ruiqing.dao.RuiqingMapper;
 import com.ruiqing.dto.RuiqingDTO;
-import com.ruiqing.dto.LaivieUserInfoDTO;
-import com.ruiqing.dto.SortDTO;
+import com.ruiqing.entity.Money;
 import com.ruiqing.service.RuiqingService;
-import io.swagger.annotations.*;
-import org.apache.commons.lang3.ObjectUtils;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 
@@ -43,10 +39,10 @@ public class RuiqingController extends BaseController {
 	@ApiOperation(value = "查询")
 	@PostMapping("/getRuiqingInfo")
 	@LoggerTest
-	public Object getRuiqingInfo(@ApiParam(value = "应用DTO对象", required = true) @RequestBody RuiqingDTO dto) {
+	public Object getRuiqingInfo(@ApiParam(value = "应用DTO对象", required = true) @RequestBody Money dto) {
 		try {
 
-			List<RuiqingDTO> ruiqing = ruiqingService.getRuiqingInfo(dto);
+			List<Money> ruiqing = ruiqingService.getRuiqingInfo(dto);
 			//RedisUtil.addBoundSetOps("keys", JSON.toJSONString(boundHydroelectricByExtId));
 			return renderSuccess(ruiqing);
 		} catch (Exception e ){
@@ -72,7 +68,7 @@ public class RuiqingController extends BaseController {
 	 */
 	@ApiOperation(value = "新增")
 	@PostMapping(value = { "/insertRuiqingInfo" })
-	public Object insertRuiqingInfo(@ApiParam(value = "DTO对象", required = true) @RequestBody RuiqingDTO dto) throws Exception {
+	public Object insertRuiqingInfo(@ApiParam(value = "DTO对象", required = true) @RequestBody Money dto) throws Exception {
 		ruiqingService.insertRuiqingInfo(dto);
 		return renderSuccess(ruiqingService.getRuiqingInfo(dto));
 	}

@@ -2,6 +2,7 @@ package com.ruiqing.dto;
 
 import com.ruiqing.entity.Ruiqing;
 import io.swagger.annotations.ApiModel;
+import lombok.Data;
 
 /**
  * 
@@ -10,6 +11,9 @@ import io.swagger.annotations.ApiModel;
  *
  */
 @ApiModel(description="")
+@Data
 public class RuiqingDTO extends Ruiqing {
-	
+	private String httpReqId;
+	private String reqUrl;
+	private String reqData;
 }

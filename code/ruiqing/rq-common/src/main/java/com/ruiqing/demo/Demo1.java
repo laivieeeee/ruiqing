@@ -1,57 +1,45 @@
 package com.ruiqing.demo;
 
-import java.util.concurrent.TimeUnit;
-
 /**
  * @Author: Lai JianZheng
  * @Date: 2020/7/21 14:32
  */
 
-public class Demo1 {
+public class Demo1 extends jz1{
+    String d ;
+    Demo1 () {
+        System.out.println("6");
+    }
+    Demo1 (String s) {
+        System.out.println("6"+s);
+    }
+    static {
+        System.out.println("3");
+    }
 
-    public static class R1 implements Runnable {
-
-        @Override
-
-        public void run() {
-
-            System.out.println("threadName:" + Thread.currentThread().getName());
-
-            try {
-
-                TimeUnit.SECONDS.sleep(3);
-
-            } catch (InterruptedException e) {
-
-                e.printStackTrace();
-
-            }
-
-        }
+    public static void main(String[] args) {
+        Demo1 d = new Demo1("7");
+        Demo1 d2 = new Demo1();
 
     }
 
-
-    public static void main(String[] args) throws InterruptedException {
-
-        ThreadGroup threadGroup = new ThreadGroup("thread-group-1");
-
-        Thread t1 = new Thread(threadGroup, new R1(), "t1");
-
-        Thread t2 = new Thread(threadGroup, new R1(), "t2");
-
-        t1.start();
-
-        t2.start();
-
-        TimeUnit.SECONDS.sleep(1);
-
-        System.out.println("活动线程数:" + threadGroup.activeCount());
-
-        System.out.println("活动线程组:" + threadGroup.activeGroupCount());
-
-        System.out.println("线程组名称:" + threadGroup.getName());
-
+}
+class jz1 extends jz2{
+    jz1 () {
+        System.out.println("5");
     }
-
+    static {
+        System.out.println("2");
+    }
+}
+class jz2{
+    jz2 () {
+        System.out.println("4");
+    }
+    jz2 (String str) {
+        System.out.println("4"+str);
+    }
+    static {
+        System.out.println("1");
+    }
 }

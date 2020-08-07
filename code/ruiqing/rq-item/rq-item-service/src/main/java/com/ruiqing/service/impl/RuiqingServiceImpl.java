@@ -3,11 +3,10 @@ package com.ruiqing.service.impl;
 
 import com.ruiqing.dao.RuiqingMapper;
 import com.ruiqing.dto.RuiqingDTO;
+import com.ruiqing.entity.Money;
 import com.ruiqing.service.RuiqingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,14 +27,14 @@ public class RuiqingServiceImpl extends BaseServiceImpl<RuiqingMapper, RuiqingDT
 	@Override
 	//#p0的意思是指加有@Cacheable注解的方法中的第一个参数
 	//@Cacheable(key ="#p0")
-	@Cacheable(value="ruiqing",key="#dto.getRuiqingId()")
-	public List<RuiqingDTO> getRuiqingInfo(RuiqingDTO dto) {
+	//@Cacheable(value="ruiqing",key="#dto.getRuiqingId()")
+	public List<Money> getRuiqingInfo(Money dto) {
 		return ruiqingMapper.getRuiqingInfo(dto);
 	}
 
 	@Override
 	//@CachePut 注释，这个注释可以确保方法被执行，同时方法的返回值也被记录到缓存中，实现缓存与数据库的同步更新。
-	@CachePut(value="ruiqing",key="#dto.getRuiqingId()")// 更新accountCache 缓存
+	//@CachePut(value="ruiqing",key="#dto.getRuiqingId()")// 更新accountCache 缓存
 	public Integer updateRuiqingInfo(RuiqingDTO dto) {
 		return ruiqingMapper.updateRuiqingInfo(dto);
 	}

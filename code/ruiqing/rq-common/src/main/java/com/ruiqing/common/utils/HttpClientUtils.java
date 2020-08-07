@@ -67,18 +67,12 @@ public class HttpClientUtils {
 			url = builder.build().toString();
 		}
 		HttpGet httpGet = new HttpGet(url);
-		CloseableHttpResponse response = null;
-		try {
-			response = httpClient.execute(httpGet);
+		try (CloseableHttpResponse response = httpClient.execute(httpGet);){
 			if (response.getStatusLine().getStatusCode() == 200) {
 				if (encode == null) {
 					encode = "UTF-8";
 				}
 				return EntityUtils.toString(response.getEntity(), encode);
-			}
-		} finally {
-			if (response != null) {
-				response.close();
 			}
 		}
 		return null;
@@ -236,15 +230,9 @@ public class HttpClientUtils {
 			UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(parameters);
 			httpPost.setEntity(formEntity);
 		}
-		CloseableHttpResponse response = null;
-		try {
-			response = httpClient.execute(httpPost);
+		try (CloseableHttpResponse response = httpClient.execute(httpPost);) {
 			if (response.getStatusLine().getStatusCode() == 200) {
 				return EntityUtils.toString(response.getEntity(), "UTF-8");
-			}
-		} finally {
-			if (response != null) {
-				response.close();
 			}
 		}
 		return null;
@@ -257,15 +245,9 @@ public class HttpClientUtils {
 			StringEntity stringEntity = new StringEntity(json, "UTF-8");
 			httpPost.setEntity(stringEntity);
 		}
-		CloseableHttpResponse response = null;
-		try {
-			response = httpClient.execute(httpPost);
+		try(CloseableHttpResponse response = httpClient.execute(httpPost)) {
 			if (response.getStatusLine().getStatusCode() == 200) {
 				return EntityUtils.toString(response.getEntity(), "UTF-8");
-			}
-		} finally {
-			if (response != null) {
-				response.close();
 			}
 		}
 		return null;

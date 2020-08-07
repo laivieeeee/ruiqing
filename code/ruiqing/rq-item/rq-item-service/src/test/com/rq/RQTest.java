@@ -20,6 +20,6 @@ public class RQTest {
 
     @Test
     public void dd () {
-        ruiqingService.dd("赖建争");
+        System.out.println("3333");
     }
 }

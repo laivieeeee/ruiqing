@@ -2,6 +2,7 @@ package com.ruiqing.service;
 
 
 import com.ruiqing.dto.RuiqingDTO;
+import com.ruiqing.entity.Money;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
 public interface RuiqingService extends BaseService<RuiqingDTO> {
 	
 
-	List<RuiqingDTO> getRuiqingInfo(RuiqingDTO dto);
+	List<Money> getRuiqingInfo(Money dto);
 
 	Integer updateRuiqingInfo(RuiqingDTO dto);
 

@@ -5,6 +5,10 @@
 		insert into
 		ruiqing_info(ruiqing_id, name) values (#{ruiqingId},#{name})
 	</insert>
+	<insert id="insertMoneyIndex">
+		INSERT INTO money_index(index_id, zqname, jrkpj, zrkpj, zrspj, dqjg, jrzgj, jrzdj, mr1, mc1, cjgps, cjjr, m1g, m1j, m2g, m2j, m3g, m3j, m4g, m4j, m5g, m5j, c1g, c1j, c2g, c2j, c3g, c3j, c4g, c4j, c5g, c5j, day, time, code)
+		VALUES (REPLACE(UUID(),'-',''), #{zqname}, #{jrkpj}, #{zrkpj}, #{zrspj}, #{dqjg}, #{jrzgj}, #{jrzdj}, #{mr1}, #{mc1}, #{cjgps}, #{cjjr}, #{m1g}, #{m1j}, #{m2g}, #{m2j}, #{m3g}, #{m3j}, #{m4g}, #{m4j}, #{m5g}, #{m5j}, #{c1g}, #{c1j}, #{c2g}, #{c2j}, #{c3g}, #{c3j}, #{c4g}, #{c4j}, #{c5g}, #{c5j}, #{day}, #{time}, #{code});
+	</insert>
 	<update id="updateRuiqingInfo">
 		update
 
@@ -18,14 +22,15 @@
 		delete from ruiqing_info where ruiqing_id = #{ruiqingId}
 	</delete>
 
-	<select id="getRuiqingInfo" parameterType="com.ruiqing.dto.RuiqingDTO" resultType="com.ruiqing.dto.RuiqingDTO">
+	<select id="getRuiqingInfo" parameterType="com.ruiqing.dto.RuiqingDTO" resultType="com.ruiqing.entity.Money">
 		SELECT
-			name,
-			ruiqing_id ruiqingId
+			ri.ruiqing_id ruiqingId,
+			ri.code code,
+			hr.req_url reqUrl
 		FROM
-			ruiqing_info
-		WHERE
-			ruiqing_id = #{ruiqingId}
+			ruiqing_info ri
+			JOIN ruiqing_http_req hr ON ri.http_req_id = hr.http_req_id
+		where status = '1'
 	</select>
 
 </mapper>

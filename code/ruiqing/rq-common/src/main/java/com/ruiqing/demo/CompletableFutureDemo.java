@@ -1,13 +1,12 @@
 package com.ruiqing.demo;
 
-import com.ruiqing.dto.SortDTO;
-
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-import java.util.function.*;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * @Author: Lai JianZheng
@@ -21,7 +20,8 @@ public class CompletableFutureDemo {
     public static void main(String[] args) throws Exception {
         System.out.println("1");
         Future<String> dd = dd("lj");
-        System.out.println("4"+dd.get());
+        System.out.println("4");
+        dd.get();
     }
 
     private static Future<String> dd (String str) throws ExecutionException, InterruptedException {
