@@ -53,33 +53,33 @@ public class Money extends RuiqingDTO {
 
     @Override
     public String toString() {
-        return "最新='" + dqjg + '\'' +
-                ", 最高='" + jrzgj + '\'' +
-                ", 最低='" + jrzdj + '\'' +
-                ", 数='" + cjgps + '\'' +
-                ", 金额='" + cjjr + '\'' +
-                ", 时间='" + time + '\'' +
+        return "最新 = '" + dqjg + '\'' +
+                ", 最高 = '" + jrzgj + '\'' +
+                ", 最低 = '" + jrzdj + '\'' +
+                ", 数 = '" + cjgps + '\'' +
+                ", 金额 = '" + cjjr + '\'' +
+                ", 时间 = '" + time + '\'' +
 
                 "\n" + c1j +
-                "=" + c1g +
+                " = " + c1g +
                 ", " + c2j +
-                "=" + c2g +
+                " = " + c2g +
                 ", " + c3j +
-                "=" + c3g +
+                " = " + c3g +
                 ", " + c4j +
-                "=" + c4g +
+                " = " + c4g +
                 ", " + c5j +
-                "=" + c5g +
+                " = " + c5g +
                 "\n" + m1j +
-                "=" + m1g +
+                " = " + m1g +
                 ", " + m2j +
-                "=" + m2g +
+                " = " + m2g +
                 ", " + m3j +
-                "=" + m3g +
+                " = " + m3g +
                 ", " + m4j +
-                "=" + m4g +
+                " = " + m4g +
                 ", " + m5j +
-                "=" + m5g;
+                " = " + m5g;
     }
 
 }

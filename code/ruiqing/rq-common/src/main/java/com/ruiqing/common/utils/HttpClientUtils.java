@@ -35,6 +35,7 @@ import javax.net.ssl.SSLHandshakeException;
 import java.io.*;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -286,6 +287,10 @@ public class HttpClientUtils {
 		return null;
 	}
 
+	public static void main(String[] args) throws Exception {
+		HttpClientUtils dd = new HttpClientUtils();
+		dd.doDSPFileUpload("http://127.0.0.1:8082/mams-sasac/hadwnIndx/getByHadwnId?hadwnId=1",new HashMap<>(),"");
+	}
 	/**
 	 * DSP文件上传
 	 */

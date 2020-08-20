@@ -9,6 +9,8 @@ import org.apache.http.util.EntityUtils;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -20,14 +22,28 @@ public class ScheduledTasks {
 
     public static void main(String[] args) throws Exception {
         taskCustomReports();
+        //String dd = dd();
+       // long currentTimeMillis = System.currentTimeMillis();
+        //System.out.println(dd);
+        //Date startDate = new Date();
+        //202007160401561234
+        //String yyyymmddhh24missff4 = new SimpleDateFormat("yyyyMMddhh24mmss").format(startDate);
+        //System.out.println(yyyymmddhh24missff4);
+    }
+
+    private static String dd() {
+
+        return "4";
     }
 
     //@Autowired
     //private RuiqingMapper ruiqingMapper;
     //@Scheduled(cron = "10 * * * * ?")
     public static void taskCustomReports() throws Exception {
-        String url = "http://hq.sinajs.cn/list=sh600030,sz002792";
+        String url = "http://hq.sinajs.cn/list=sh000001,sh600030,sz002792";
+
         while (true) {
+            List<String> list = new ArrayList();
             // 请求返回数据
             String ret = req(url);
             String[] gpdm = ret.split(";");
@@ -36,9 +52,13 @@ public class ScheduledTasks {
                 Money dto = dd(gpmx);
                 // （最新-开盘）开盘*100
                 BigDecimal multiply = new BigDecimal(dto.getDqjg()).subtract(new BigDecimal(dto.getZrspj()));
-                System.out.print("傻逼" + multiply.divide(new BigDecimal(dto.getZrspj()), 5).multiply(new BigDecimal("100")).toString() + "-");
-                System.out.println(dto.toString());
+                String s = "傻逼" + multiply.divide(new BigDecimal(dto.getZrspj()), 5).multiply(new BigDecimal("100")).toString() + "  ";
+                if (j == gpdm.length - 2) {
+                    s = s + dto.toString();
+                }
+                list.add(s);
             }
+            list.stream().forEach(System.out::println);
         }
     }
 
@@ -48,7 +68,7 @@ public class ScheduledTasks {
         HttpGet post = new HttpGet(url);
         post.setHeader("Content-Type", "application/json");
         // 请求返回数据
-        TimeUnit.MILLISECONDS.sleep(2000);
+        TimeUnit.MILLISECONDS.sleep(3000);
         response = client.execute(post);
         return EntityUtils.toString(response.getEntity(), "UTF-8");
     }
