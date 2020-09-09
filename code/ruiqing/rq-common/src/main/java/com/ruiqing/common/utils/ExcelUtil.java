@@ -1,7 +1,11 @@
 package com.ruiqing.common.utils;
 
 import org.apache.poi.hssf.usermodel.*;
-import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.util.CellRangeAddressList;
+import org.apache.poi.xssf.usermodel.XSSFDataValidation;
+import org.apache.poi.xssf.usermodel.XSSFDataValidationConstraint;
+import org.apache.poi.xssf.usermodel.XSSFDataValidationHelper;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
@@ -11,16 +15,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
-import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map.Entry;
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
-import org.apache.poi.hssf.usermodel.HSSFFont;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.HorizontalAlignment;
-import org.apache.poi.ss.util.CellRangeAddress;
 /**
  * @ClassName: ExcelUtil
  * @Description: excel文件操作工具类
@@ -287,5 +288,16 @@ public class ExcelUtil {
 		SimpleDateFormat sdf = new SimpleDateFormat("HHmmss");
 		Calendar cl = new GregorianCalendar();
 		return sdf.format(cl.getTime());
+	}
+	//生成excel的下拉列表
+	public static void createDropdownBox(List<String> list, XSSFSheet sheet, int firstRow, int lastRow, int firstCol, int lastCol) {
+		String[] data = (String[]) list.toArray();
+		XSSFDataValidationHelper dvHelper = new XSSFDataValidationHelper(sheet);
+		XSSFDataValidationConstraint dvConstraint = (XSSFDataValidationConstraint) dvHelper.createExplicitListConstraint(data);
+		CellRangeAddressList addressList = new CellRangeAddressList(firstRow, lastRow, firstCol, lastCol);
+		XSSFDataValidation validation = (XSSFDataValidation) dvHelper.createValidation(dvConstraint, addressList);
+		validation.setSuppressDropDownArrow(true);
+		validation.setShowErrorBox(true);
+		sheet.addValidationData(validation);
 	}
 }
