@@ -1,23 +1,19 @@
 package com.rq;
 
-import com.ruiqing.RqItemService;
 import org.apache.zookeeper.*;
 import org.apache.zookeeper.data.Stat;
 import org.apache.zookeeper.proto.WatcherEvent;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.netflix.ribbon.RibbonLoadBalancerClient;
-import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * @Author: Lai JianZheng
  * @Date: 2020/8/3 14:52
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes= RqItemService.class)
+//@RunWith(SpringRunner.class)
+//@SpringBootTest(classes= RqItemService.class)
 public class RQTest {
    // @Autowired
    // RuiqingServiceImpl ruiqingService;
@@ -25,6 +21,22 @@ public class RQTest {
     @Test
     public void dd () {
         System.out.println("3333");
+    }
+    @Test
+    public void dd1 () {
+        // 1 获取文件系统
+        /*Configuration configuration = new Configuration();
+        // 配置在集群上运行
+        // configuration.set("fs.defaultFS", "hdfs://hadoop102:9000");
+        // FileSystem fs = FileSystem.get(configuration);
+
+        FileSystem fs = FileSystem.get(new URI("hdfs://hadoop102:9000"), configuration, "atguigu");
+
+        // 2 创建目录
+        fs.mkdirs(new Path("/1108/daxian/banzhang"));
+
+        // 3 关闭资源
+        fs.close();*/
     }
     @Autowired
     RibbonLoadBalancerClient client;
